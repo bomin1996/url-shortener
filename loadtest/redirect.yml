@@ -1,0 +1,32 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 30
+      arrivalRate: 50
+      name: "Warm up"
+    - duration: 60
+      arrivalRate: 200
+      name: "Ramp up"
+    - duration: 30
+      arrivalRate: 500
+      name: "Peak load"
+
+scenarios:
+  - name: "Create and redirect"
+    flow:
+      - post:
+          url: "/api/shorten"
+          json:
+            url: "https://www.example.com/test/{{ $randomNumber() }}"
+          capture:
+            - json: "$.shortCode"
+              as: "shortCode"
+      - get:
+          url: "/{{ shortCode }}"
+          followRedirect: false
+      - get:
+          url: "/{{ shortCode }}"
+          followRedirect: false
+      - get:
+          url: "/{{ shortCode }}"
+          followRedirect: false

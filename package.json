@@ -6,7 +6,9 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "loadtest:create": "artillery run loadtest/create-urls.yml",
+    "loadtest:redirect": "artillery run loadtest/redirect.yml"
   },
   "keywords": [],
   "author": "bomin1996",
@@ -15,11 +17,14 @@
   "dependencies": {
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "ioredis": "^5.10.1",
     "mysql2": "^3.20.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "@types/ioredis": "^5.0.0",
     "@types/node": "^25.5.2",
+    "artillery": "^2.0.30",
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2"
